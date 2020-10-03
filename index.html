@@ -2,188 +2,273 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="bodyFat.css">
-
-  <script src="jquery-3.4.1.min.js"></script>
-
-
-  <title>bodyFat calculator</title>
-
-  <div class="navBar">
-    <h2>體脂計算器</h2>
-    <a href="https://www.facebook.com/profile.php?id=100003999642145" target="_blank"><img src="img/fb.png" alt=""></a>
-  </div>
-
-  <script type="text/javascript">
-
-    $(function() {
-        $("#calc").click(function() {
-          var h = $("#height").val(),
-              w = $("#weight").val(),
-              a = $("#age").val(),
-              s = $("#sex").val();
-
-
-          if (h == '') {
-            alert("請輸入身高 ~");
-          } else if (w == "") {
-            alert("請輸入體重 ~");
-          } else if (a == "") {
-            alert("請輸入年齡 ~");
-          } else if(h > 2) {
-            alert("你是不是巨人 身高要填公尺唷XD")
-          }  else {
-            // 計算並回傳 BMI 數值，只取到小數點第 2 位
-            var bmi = w / (h * h);
-            $("#BmiValue").val(formatFloat(bmi, 2));
-            BmiStandard(bmi);
-
-
-            var bmiRate = (1.2 * bmi) + (0.23 * a - 5.4) - (10.8 * s);
-            $("#bodyRateValue").val(formatFloat(bmiRate, 2));
-            bodyRateStandard(s, bmiRate);
-          }
-        });
-        var BmiStandardResult = $("#BmiStandard");
-        if (BmiStandardResult <18.5){
-          alert("繼續保持");
-        }else if (BmiStandardResult >24) {
-          alert("繼續保持");
-        }
-        $("#empty").click(function() {
-          $("#height").val('');
-          $("#weight").val('');
-          $("#age").val('');
-          $("#BmiValue").val('');
-          $("#bodyRateValue").val('');
-          $("#BmiStandard").val('');
-          $("#bodyRateStandard").val('');
-        });
-      });
-
-
-      function BmiStandard(n) {
-        if (n < 18.5) {
-          $('#BmiStandard').val('太輕囉');
-          // alert("宜盈趕快去吃飯")
-        } else if (n > 24) {
-          $('#BmiStandard').val('太重囉');
-        } else {
-          $('#BmiStandard').val('超標準');
-        }
-      }
-
-      function bodyRateStandard(g, f) {
-        if (g == 1 && f <= 25) {
-          $('#bodyRateStandard').val('標準');
-        } else if (g == 1 && f > 25) {
-          $('#bodyRateStandard').val('肥胖');
-        } else if (g == 0 && f <= 30) {
-          $('#bodyRateStandard').val('標準');
-        } else if (g == 0 && f > 30) {
-          $('#bodyRateStandard').val('肥胖');
-        }
-      }
-
-      function formatFloat(num, pos) {
-        var size = Math.pow(10, pos);
-        return Math.round(num * size) / size;
-      }
-  </script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/main.css" />
+  <title>d’Perfume</title>
 </head>
 
 <body>
-  <div class="title">
-    <h2>體脂率</h2>
-    <hr>
-  </div>
-  <div class="containerContent">
-    <div class="left">
-      <div class="introduction">
-        <h2>Introduction</h2>
-        <p>體脂肪率，又稱體脂百分比、體脂率，是將脂肪含量用其占總體重的百分比的形式表示，一般用於動物，但近年開始有在人體的應用。對於動物來說，體脂百分比的計算法是把動物體重中的脂肪部分重量與整個身體的分量相除，再乘以100%。
-        </p>
-        <p>對於男性，必需脂肪一般佔體重的2～5%，而女性約為10～13%。儲存脂肪由脂肪組織內所累積的脂肪組成，當中部份位於胸腔及腹部，用以保護身體的內臟。一般來說，最小的建議總體脂百分比都會比身體的必需脂肪比例高。直接測量體脂百分比具有一定的難度，所以現時網上一般的方法，都是透過對人的性別及體重資料作出評估。
-        </p>
-      </div>
-      <div class="reduceBodyFat">
-        <h2>Reduce Bodyfat</h2>
-        <p>降低體脂肪比率方法：</p>
-        <ul>
-          <li>透過有氧運動減少脂肪。</li>
-          <li>透過重量訓練增加肌肉量，充足的肌肉所燃燒的脂肪比長時間有氧運動更強大。</li>
-          <li>減少攝入熱量，自然消耗體脂肪方法，一般是節食，節食方法需要堅持較長時間，對身體和意志力都是考驗。</li>
+  <!-- Navbar  Start-->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="./index.html">
+        <img src="./asset/d’Perfume.png" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./productList.html">
+              <img src="./asset/tshirt.svg" alt=""> Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./login.html"><img src="./asset/user-alt.svg" alt=""> log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-heart"></i> Wishlist</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pr-0" href="#"><img src="./asset/shopping-cart.svg" alt=""> Cart(3)</a>
+          </li>
         </ul>
       </div>
+    </nav>
+  </div>
+  <!-- Navbar End -->
+
+  <!-- Jumbotron Start -->
+  <div class="jumbotron jumbotron-fluid mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 offset-lg-7 jumbotronSlogan">
+          <h1>Perfume your day</h1>
+          <p>A perfume is like a piece of clothing, a message, a way of presenting oneself a costume that
+            according to the person who wears it.</p>
+          <a href="./productList.html"><button type="button" class="btn btn-primary btn-lg">Shop now</button></a>
+
+        </div>
+      </div>
     </div>
-    <div class="right">
-      <div class="Standard">
-        <h2>Standard</h2>
-        <p>雖然要直接測量體脂百分比具有一定的難度，但也不是完全沒有辦法的。其中最為精確但較為昂貴的方法是測量患者在水下的體重，即靜水體重。其他較為簡單但精確度稍差的方法是，測量皮褶厚度，也即測定特定部位皮下脂肪的厚度。另一個方法是測量生物電阻，但該方法由於多數家用儀器僅僅測量雙腳間的生物電阻且精度不同，所以並不被一些機構推薦為替代 BMI 的方法。
+  </div>
+  <!-- Jumbotron End -->
+
+  <!-- content Start -->
+  <div class="container item">
+    <!-- item1 Start-->
+    <div class="container">
+      <div class="row flex-lg-row-reverse">
+        <div class="col-12 col-lg-6 itemImg">
+          <img src="./asset/item1.png" alt="">
+        </div>
+        <div class="col-12 col-lg-6 itemDescribe">
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-lg-8 p-0">
+              <h1 class='title'>Gabrielle CHANEL</h1>
+              <p class='text'>全新嗅覺體驗，花香四溢、明亮馥郁。結合茉莉、依蘭依蘭、橙花和最迷人的格拉斯晚香玉之花香，呈現出夢幻花香氣息。 極具女性特質的香奈兒嘉柏麗香水，專為光芒四射的她而生。</p>
+              <a class='link' href="">查看更多</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- item1 End-->
+    <!-- item2 Start-->
+    <div class="container">
+      <div class="row flex-row flex-row">
+        <div class="col-lg-6 itemImg"><img src="./asset/item2.png" alt=""></div>
+        <div class="col-lg-6  itemDescribe">
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-lg-8 p-0">
+              <h1 class='title'>Five O’clock Au Gingembre</h1>
+              <p class='text'>生薑與溫醇的肉桂香、紅糖的香甜摻和成一氣，溫暖微辛的氣息反倒形成一股輕煙氤氳開來，還帶點微微煙醺感漫溢在整個鼻息之間，細聞之下,又還有溫溫淡淡的木香，溫和而暖心。</p>
+              <a class='link' href="">查看更多</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- item2 End-->
+    <!-- item3 Start-->
+    <div class="container">
+      <div class="row flex-lg-row-reverse">
+        <div class="col-lg-6 itemImg"><img src="./asset/item3.png" alt=""></div>
+        <div class="col-lg-6 itemDescribe">
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-lg-8 p-0">
+              <h1 class='title'>CHANEL N°5</h1>
+              <p class='text'>N°5，女性魅力的極致精髓。散發柔美澄透的乙醛花束香氣。經典傳奇香氛，蘊藏於極簡設計的獨特瓶身。</p>
+              <a class='link' href="">查看更多</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- item3 End-->
+    <!-- item4 Start-->
+    <div class="container">
+      <div class="row flex-row flex-lg-row ">
+
+        <div class="col-12 col-lg-6 itemImg"><img src="./asset/item4.png" alt=""></div>
+
+        <div class="col-lg-6 itemDescribe  flex-column flex-lg-column justify-content-lg-around align-items-lg-center">
+          <!-- Card1 -->
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-12 col-lg-8 p-0">
+              <h4>1. <br>Levels of Preventive Maintenance Compliance</h4>
+              <p>The core idea of preventative maintenance is the performance of proactive actions against unscheduled
+                downtime in order to identify potential defects before they evolve into something more severe.</p>
+            </div>
+          </div>
+          <!-- Card1 -->
+          <!-- Card2 -->
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-12 col-lg-8 p-0">
+              <h4>2. <br>Percentage of Planned Maintenance</h4>
+              <p>The planned maintenance percentage is the total planned maintenance time in your CMMS software over a
+                date range over the total number of hours of a service performed by the technicians.</p>
+            </div>
+          </div>
+          <!-- Card2 -->
+          <!-- Card3 -->
+          <div class="row justify-content-lg-center align-items-lg-center">
+            <div class="col-12 col-lg-8 p-0">
+              <h4>3. <br>Critical percentage of planned maintenance</h4>
+              <p>Calculating the critical percentage of planned maintenance will help you prioritize the most important
+                operations that should be performed immediately.</p>
+            </div>
+          </div>
+          <!-- Card3 -->
+          <div class="row justify-content-lg-start align-items-lg-center">
+            <div class="col-12 col-lg-12 p-0">
+              <button type="button" class="btn btn-primary btn-lg  ">Plan a free online training</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- item4 End-->
+  </div>
+  <!-- content End -->
+
+  <!-- productClass  start -->
+  <div class="container-fluid p-0 productClass">
+    <div class="container p-0">
+      <div class="row productClass">
+
+        <div class="col-12 col-lg-4 mb-2 mt-lg-5 mb-lg-5">
+          <img src="./asset/p1.png" alt="">
+          <h4 class='mt-2'>Poppy & Barley</h4>
+          <p>Jo Malone</p>
+          <div class="price">
+            <p>NT$1,380</p>
+            <span>NT$1,580</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 mb-2 mt-lg-5 mb-lg-5">
+          <img src="./asset/p2.png" alt="">
+          <h4 class='mt-2'>Body Wash</h4>
+          <p>Curology</p>
+          <p>NT$1,580</p>
+        </div>
+
+        <div class="col-12 col-lg-4 mb-2 mt-lg-5 mb-lg-5">
+          <img src="./asset/p3.png" alt="">
+          <div class="mask">
+            <img src="./asset/p3-1.svg" alt="">
+          </div>
+          <h4 class='mt-2'>Apple Cider Vinegar Capsule</h4>
+          <p>Tonik</p>
+          <p>NT$1,580</p>
+        </div>
+
+      </div>
+    </div>
+    <!-- productClass  End -->
+  </div>
+  <!-- productClass  End -->
+
+  <!-- Recycle Start -->
+  <div class="container recycle">
+    <div class="row  justify-content-lg-center align-items-lg-center">
+      <div class="col-12 col-lg-8">
+        <img src="./asset/recycle.png" alt="">
+      </div>
+      <div class="col-lg-4">
+        <h2>
+          Bottle-Recycling
+        </h2>
+        <h5>
+          Recycle your used empty bottles and be rewarded!
+        </h5>
+        <p>
+          For the past 10 years, we have collected over 800,000 bottles through Empty Bottle Recycling Campaign and
+          planted more than 860 pine trees for a better environment.For the past 10 years, we have collected over
+          800,000 bottles through Empty Bottle Recycling Campaign and planted more than 860 pine trees for a better
+          environment.
         </p>
+        <a href="">查看更多</a>
       </div>
-      <div class="formula">
-        <h2>Formula</h2>
-        <h3>體脂 (%) = ( 1.2 x BMI ) + ( 0.23 x 年齡 - 5.4 ) - ( 10.8 x 性別 )</h3>
+    </div>
+
+  </div>
+  <!-- Recycle End-->
+
+  <!-- Meaage Start -->
+  <div class="container-fluid mt-5 mt-lg-6 message ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mt-312">
+          <h2>記得<br>訂閱以獲取更多資訊！</h2>
+          <div class="input-group mb-3 mt-3">
+            <input type="text" class="form-control " placeholder="Your email address" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">Subscribe</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="containerInformation">
-    <div class="containerInput">
-      <div class="height">
-        <span>身高 (m):</span>
-        <input type="number" id="height" name="" value="" placeholder="請輸入身高(單位為公尺唷)">
-      </div>
-      <div class="weight">
-        <span>體重 (kg):</span>
-        <input type="number" id="weight" name="" value="" placeholder="請輸入體重">
-      </div>
-      <div class="age">
-        <span>年齡 (year):</span>
-        <input type="number" id="age" name="" value="" placeholder="請輸入年齡">
-      </div>
-      <div class="sex">
-        <span>性別: </span>
-        <select id="sex">
-          <option value="1">男生 (Male)</option>
-          <option value="0">女生 (Female)</option>
-        </select>
-      </div>
-    </div>
+  <!-- Meaage End -->
 
-    <div class="containerText">
-      <div class="BmiValue">
-        <span>BMI數值: </span>
-        <input type="text" id="BmiValue" name="" readonly="true">
-      </div>
-      <div class="bodyRateValue">
-        <span>體指率數值: </span>
-        <input type="text" id="bodyRateValue" name="" readonly="true">
-      </div>
-      <div class="BmiStandard">
-        <span>BMI標準: </span>
-        <input type="text" id="BmiStandard" name="" readonly="true">
-      </div>
-      <div class="bodyRateStandard">
-        <span>體指率標準: </span>
-        <input type="text" id="bodyRateStandard" name="" readonly="true">
-      </div>
-    </div>
+  <!-- Footer Start -->
+  <div class="container-fluid footer">
+    <div class="container">
+      <nav class="navbar">
+        <div class="left">
+          <a class="navbar-brand" href="#">
+            <img src="./asset/d’Perfumew.png" alt="">
+          </a>
+          <span class='poa'>© 2020. All Rights Reserved</span>
+        </div>
 
-    <div class="containerButton">
-      <div class="calculator">
-        <button type="button" id="calc"><span>計算 </span></button>
-      </div>
-      <div class="blank">
-        <button type="button" id="empty"><span>清空 </span></button>
-      </div>
+        <ul class="nav d-none">
+          <li class="nav-item d-flex">
+            <a class="nav-link" href="#">Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
-
+  <!-- Footer End -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
